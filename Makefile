@@ -3,7 +3,7 @@ SHELL=/bin/bash -euo pipefail
 export PATH := .bin:${PATH}
 export PWD := $(shell pwd)
 export CIRCLE_TAG := ${CIRCLE_TAG}
-export VERSION=$(shell echo ${CIRCLE_TAG} | sed s/v//g)
+export VERSION=0.22.3
 
 .bin/yq: go.mod
 	go build -o .bin/yq github.com/mikefarah/yq/v3
