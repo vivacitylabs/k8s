@@ -109,10 +109,10 @@ spec:
             {{- end }}
             - --config
             - /etc/config/kratos.yaml
-            {{- if .Values.deployment.extraArgs }}
           {{ end }}
+          {{- if .Values.deployment.extraArgs }}
 {{ toYaml .Values.deployment.extraArgs | indent 12 }}
-            {{- end }}
+          {{- end }}
           volumeMounts:
             {{- if .Values.deployment.extraVolumeMounts }}
 {{ toYaml .Values.deployment.extraVolumeMounts | indent 12 }}

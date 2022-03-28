@@ -180,10 +180,15 @@ deployment:
     periodSeconds: 10
     failureThreshold: 5
 
-  # -- Array of extra argumetns to be passed down to the deployment. Kubernetes args format is expected
+  # -- Array of extra arguments to be passed down to the deployment. Kubernetes args format is expected
   # - --foo
   # - --sqa-opt-out
   extraArgs: []
+
+  # -- Array of extra arguments to be passed down to the courier deployment. Kubernetes args format is expected
+  # - --foo
+  # - --sqa-opt-out
+  extraArgsCourier: []
 
   # Set these to override the entrypoint of the deployment container
   # (e.g. to source dynamic secrets or export environment dynamic variables)
@@ -191,6 +196,11 @@ deployment:
   customCommand: ""
   customArgs: ""
 
+  # Set these to override the entrypoint of the courier container
+  # (e.g. to source dynamic secrets or export environment dynamic variables)
+  # This can be a multiline string with templating to be parsed as a YAML array
+  customCommandCourier: ""
+  customArgsCourier: ""
 
   # -- Array of extra envs to be passed to the deployment. Kubernetes format is expected
   # - name: FOO

@@ -41,7 +41,24 @@ spec:
         - name: {{ include "kratos.fullname" . }}-courier
           image: {{ include "kratos.image" . }}
           imagePullPolicy: {{ include "kratos.imagePullPolicy" . }}
-          args: [ "courier", "watch", "--config", "/etc/config/kratos.yaml" ]
+          command:
+          {{ if .Values.deployment.customCommandCourier }}
+{{ tpl .Values.deployment.customCommandCourier . | indent 12 }}
+          {{ else }}
+            - kratos
+          {{ end }}
+          args:
+          {{ if .Values.deployment.customArgsCourier }}
+{{ tpl .Values.deployment.customArgsCourier . | indent 12 }}
+          {{ else }}
+            - courier
+            - watch
+            - --config
+            - /etc/config/kratos.yaml
+          {{ end }}
+          {{- if .Values.deployment.extraArgsCourier }}
+{{ toYaml .Values.deployment.extraArgsCourier | indent 12 }}
+          {{- end }}
           volumeMounts:
             - name: {{ include "kratos.fullname" . }}-config-volume
               mountPath: /etc/config
