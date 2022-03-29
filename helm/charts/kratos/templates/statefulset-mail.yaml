@@ -41,6 +41,8 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      automountServiceAccountToken: {{ .Values.deployment.automountServiceAccountToken }}
+      serviceAccountName: {{ include "kratos.serviceAccountName" . }}
       containers:
         - name: {{ include "kratos.fullname" . }}-courier
           image: {{ include "kratos.image" . }}
