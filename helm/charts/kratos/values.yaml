@@ -419,6 +419,7 @@ watcher:
   enabled: false
   image: oryd/k8s-toolbox:0.0.2
   mountFile: ''
+  customCommand: ""
   # mountFile: /etc/secrets/my-secret/foo
 
 # -- PodDistributionBudget configuration

@@ -73,10 +73,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ .Values.watcher.image }}
           command:
+          {{ if .Values.watcher.customCommand }}
+{{ tpl .Values.watcher.customCommand . | indent 12 }}
+          {{ else }}
             - /bin/bash
             - -c
             - |
 {{ .Files.Get "files/watch.sh" | printf "%s" | indent 14 }}
+          {{ end }}
           env:
             - name: NAMESPACE
               value: {{ .Release.Namespace | quote }}
